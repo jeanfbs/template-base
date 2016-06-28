@@ -33,41 +33,15 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('logado', function()
 {
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
-});
-
-
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
-});
-
-/*
-|--------------------------------------------------------------------------
-| Guest Filter
-|--------------------------------------------------------------------------
-|
-| The "guest" filter is the counterpart of the authentication filters as
-| it simply checks that the current user is not logged in. A redirect
-| response will be issued if they are, which you may freely change.
-|
-*/
-
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+	/*
+	* Session retorna ou 1 se a key existir se não
+	* não retorna nada por isso o teste é igual a vazio ''
+	*/
+	
+	if(Session::has('cod_user') == '')
+		return Redirect::to("/");
 });
 
 /*

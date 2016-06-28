@@ -11,7 +11,29 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', "HomeController@showIndex");
+Route::post('auth','LoginController@autenticar');
+// Route::get('auth',function(){
+// 	return View::make('assets.404');
+// });
+
+
+Route::group(array('prefix' => 'panel-control'/*,'before' => 'logado'*/),function(){
+	// Menu Bar routes
+	// Route::get('dashboard','DashboardController@getDashboard');
+	// Route::get('logout','DashboardController@getLogout');
+	// Route::get('perfil','DashboardController@getPerfil');
+	
+	// Route::post('perfil','DashboardController@postPerfil');
+	Route::get('/layout', function(){
+
+		return View::make("layout.layout");
+	});
 });
+// Metodo utilizado igualmente para o
+	// missing do controller porém aqui
+	// e da propria aplicação
+// App::missing(function($exception)
+// {
+// 	return View::make('assets.404');
+// });

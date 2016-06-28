@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => '321005',
+	'key' => '100a100a100a100a',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -190,5 +190,18 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 	),
+
+
+
+
+	// Configurações do sistema
+	
+	"systemName" => "Devoops V1",
+	"languages" => array(
+
+		"português",
+		"english",
+
+		),
 
 );
