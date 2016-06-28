@@ -20,7 +20,8 @@
 		<script src="{{url('plugins/bootstrap/bootstrap.min.js')}}"></script>
 		<script src="{{url('plugins/justified-gallery/jquery.justifiedGallery.min.js')}}"></script>
 		<!-- All functions for this theme + document.ready processing -->
-
+		<script src="{{url('js/utilidade.js')}}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{url('js/alertas.js')}}" type="text/javascript" charset="utf-8"></script>
 		<script src="{{url('js/devoops.js')}}"></script>
 
 		<script>
@@ -170,6 +171,12 @@
 					<a href="ajax/dashboard.html">
 						<i class="fa fa-dashboard"></i>
 						<span class="hidden-xs">Dashboard</span>
+					</a>
+				</li>
+				<li>
+					<a href="{{url('panel-control/usuario')}}">
+						<i class="fa fa-users"></i>
+						<span class="hidden-xs">Usuario</span>
 					</a>
 				</li>
 				<li class="dropdown">

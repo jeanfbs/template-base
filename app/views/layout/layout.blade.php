@@ -357,8 +357,7 @@
 		</div>
 	</div>
 </div>
-<script src="{{url('js/utilidade.js')}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{url('js/alertas.js')}}" type="text/javascript" charset="utf-8"></script>
+
 <script type="text/javascript">
 // Run Select2 plugin on elements
 function DemoSelect2(){

@@ -25,10 +25,7 @@ Route::group(array('prefix' => 'panel-control'/*,'before' => 'logado'*/),functio
 	// Route::get('perfil','DashboardController@getPerfil');
 	
 	// Route::post('perfil','DashboardController@postPerfil');
-	Route::get('/layout', function(){
-
-		return View::make("layout.layout");
-	});
+	Route::controller('/usuario', "UsuarioController");
 });
 // Metodo utilizado igualmente para o
 	// missing do controller porém aqui
