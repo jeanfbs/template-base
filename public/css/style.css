@@ -745,25 +745,32 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
   white-space: normal;
 }
 .btn {
-  border: 1px solid transparent;
-  border-bottom: 3px solid transparent;
-  text-decoration: none;
-  cursor: pointer;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Segoe UI",Verdana,sans-serif;
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 24px;
-  margin: 0 0 10px 0;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  outline: none !important;
+      border-width: 1px;
+    border-style: solid;
+    border-width: 1px;
+    text-decoration: none;
+    border-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    outline: none;
+    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Segoe UI",Verdana,sans-serif;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    font-size: 14px!important;
+    font-weight: bold;
+    text-align: center;
+    background-color: #a2a2a2;
+    background: #a2a2a2 -moz-linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
+    background: #a2a2a2 -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0)));
+    line-height: 24px;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    outline: none !important;
 }
 .btn-label-left span {
   position: relative;

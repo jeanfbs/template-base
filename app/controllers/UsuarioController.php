@@ -14,7 +14,7 @@
  	public function getIndex()
 	{
 		Session::put('flag',1);
-		return View::make('usuario.usuario');
+		return View::make('funcionario.funcionario');
 	}
 	/*******************************************
 	*  Ação que retorna a View de Cadastro para 
@@ -22,7 +22,7 @@
 	********************************************/
 	public function getCadastro()
 	{
-		return View::make('usuario.cadastro');
+		return View::make('funcionario.cadastro');
 	}
 	/*******************************************
 	*  Ação para Cadastro de Usuarios do Sistema

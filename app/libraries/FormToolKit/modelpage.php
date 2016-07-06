@@ -1,7 +1,6 @@
-@extends('template')
-
-@section('title')   {{trans('geral.titulo_usuario')}}    @stop
-@section('content')
+@extends("template")
+@section("title")   {{trans(Config::get("app.locale").".titulo_$filename")}}    @stop
+@section("content")
 <!--Start Breadcrumb-->
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">
@@ -9,9 +8,9 @@
 			<i class="fa fa-bars"></i>
 		</a>
 		<ol class="breadcrumb pull-left">
-			<li><a href="{{url('panel-control/dashboard')}}">{{trans('geral.breadcrumb_home')}}</a></li>
-			<li><a href="#">{{trans('geral.titulo_usuario')}}</a></li>
-			<li><a href="#" id="view_name">{{trans('geral.tab_pesquisar')}}</a></li>
+			<li><a href="{{url('panel-control/dashboard')}}">{{trans(Config::get("app.locale").".breadcrumb_home")}}</a></li>
+			<li><a href="#">{{trans(Config::get("app.locale").".titulo_$filename")}}</a></li>
+			<li><a href="#" id="view_name">{{trans(Config::get("app.locale").".tab_pesquisar")}}</a></li>
 		</ol>
 		<div id="social" class="pull-right">
 			<a href="#"><i class="fa fa-google-plus"></i></a>
@@ -28,7 +27,7 @@
 			<div class="box-header">
 				<div class="box-name">
 					<i class="fa fa-user-plus"></i>
-					<span>{{trans('geral.titulo_usuario')}}</span>
+					<span>{{trans(Config::get("app.locale").".titulo_$filename")}}</span>
 				</div>
 				<div class="box-icons pull-right">
 					<a class="collapse-link">
@@ -43,9 +42,8 @@
 			<div class="box-content">
 				<div id="tabs">
 					<ul>
-						<li><a href="{{url('panel-control/usuario/cadastro')}}">{{trans('geral.tab_cadastro')}}</a></li>
-						<li><a href="{{url('panel-control/usuario/pesquisa')}}">{{trans('geral.tab_pesquisar')}}</a></li>
-						<li><a href="{{url('panel-control/usuario/controle')}}">{{trans('geral.tab_controle')}}</a></li>
+						<li><a href="{{url('panel-control/$filename/cadastro')}}">{{trans(Config::get("app.locale").".tab_cadastro")}}</a></li>
+						<li><a href="{{url('panel-control/$filename/pesquisa')}}">{{trans(Config::get("app.locale").".tab_pesquisar")}}</a></li>
 					</ul>
 					<div id="tabs-2">
 						
@@ -58,7 +56,7 @@
 <div style="height: 40px;"></div>
 <script>
 $(document).ready(function() {
-	$("#tabs").tabs({active: 0});
+	$("#tabs").tabs({active: 1});
 	$(document).submit(function(){return false;});
 	$( "#tabs" ).tabs({
 		beforeLoad: function( event, ui ) {

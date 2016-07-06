@@ -17,7 +17,6 @@ Route::post('auth','LoginController@autenticar');
 // 	return View::make('assets.404');
 // });
 
-
 Route::group(array('prefix' => 'panel-control'/*,'before' => 'logado'*/),function(){
 	// Menu Bar routes
 	// Route::get('dashboard','DashboardController@getDashboard');
@@ -26,6 +25,8 @@ Route::group(array('prefix' => 'panel-control'/*,'before' => 'logado'*/),functio
 	
 	// Route::post('perfil','DashboardController@postPerfil');
 	Route::controller('/usuario', "UsuarioController");
+
+	Route::controller('/funcionario', "UsuarioController");
 });
 // Metodo utilizado igualmente para o
 	// missing do controller porém aqui

@@ -1,11 +1,14 @@
 <?php 
-return array(
-	/*
-	|--------------------------------------------------------------------------
-	| Labels para o idioma local
-	|--------------------------------------------------------------------------
-	|
-	*/
+
+
+/**
+* 	Classe responsável por criar os arquivos de
+*	location.
+*/
+class LangToolKit
+{
+	private $arr_lg = 
+	array(
 /*********************************************************************************/
 //  		 Labels Genéricos 	
 	'button_cancelar' => 'Cancelar',
@@ -49,28 +52,69 @@ return array(
 	'menu_side_piquete' 				=> 'Piquetes',
 	'menu_side_lote' 				    => 'Lotes',
 	'menu_side_animal' 				    => 'Animais',
-/*********************************************************************************/
-//  		 Labels Menu
-	'titulo_perfil' => 'Meu Perfil',
-	'msg_perfil_atualizado_sucesso' => "Seus dados foram atualizados!",
-	'subtitulo_perfil' => 'Minhas Informações',
-	'infos' => 'Para editar suas informações clique no ícone <i class="fa fa-pencil"></i> no canto superior'.
-				' direito, caso não deseje editar seus dados basta clicar na mesma região'.
-				' no ícone <i class="fa fa-undo"></i>. Sua senha não será mostrada por medidas'.
-				' de segurança.',
-/*********************************************************************************/
-//  		 Labels Login
-	'bem_vindo'		 => 'Bem Vindo ao Cowaer',
-	'login' 		 => 'Login',
-	'senha' 		 => 'Senha',
-	'msg_error_login'=> 'Login ou senha inválidos!',
-/*********************************************************************************/
-//  		 Labels DashBoard
-	'titulo_dash' => 'Dashboard',
-	'calendario' => 'Calendário',
-
-/*********************************************************************************/
-//  		 Labels DashBoard
-	'titulo_usuario' => 'Usuários',
-
 );
+	private $log;
+
+	public function __construct($log_)
+	{
+		$this->log = $log_;
+		if(Lang::has(Config::get("app.locale")))
+			$this->arr_lg = Lang::get(Config::get("app.locale"));
+
+	}
+
+
+	public function showLangArray()
+	{
+		dd($this->arr_lg);
+	}
+
+	public function addValue($key = NULL, $translate = NULL)
+	{
+		if($key !== NULL && $translate !== NULL && !isset($this->arr_lg[$key]))
+		{
+			$this->arr_lg[$key] = strval($translate);
+			
+			$this->update();
+		}
+	}
+
+	public function removeValue($key = NULL)
+	{
+		if($key !== NULL)
+		{
+			unset($this->arr_lg[$key]);
+
+			$this->update();
+		}
+	}
+
+	private function update()
+	{
+		$str = "<?php\n 
+return array(
+/*
+|--------------------------------------------------------------------------
+| Labels para o idioma local
+|--------------------------------------------------------------------------
+|
+*/\n";
+
+		foreach ($this->arr_lg as $key => $value) {
+			$str .= "\t\t'$key' => '$value',\n";
+		}
+
+		$str .= ");";
+		
+		$file = base_path()."/app/lang/".Config::get("app.locale")."/".Config::get("app.locale").".php";
+		
+		file_put_contents($file,$str);
+		
+		if(!file_exists($file))
+		{
+			chmod($file,0777);
+		}
+	}
+
+
+}
