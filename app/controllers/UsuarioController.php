@@ -27,11 +27,10 @@
 	/*******************************************
 	*  Ação para Cadastro de Usuarios do Sistema
 	********************************************/
-	public function postCadastro()
+	public function postCadastrar()
 	{
 		$dados = Input::all();
 		$file = Input::file('foto');
-		unset($dados["foto"]);
 		
 		if($file != null)
 		{
@@ -67,7 +66,7 @@
 	********************************************/
 	public function getPesquisa()
 	{
-		return View::make('usuario.pesquisa');
+		return View::make('funcionario.pesquisa');
 	}
 	/*******************************************
 	*  Ação que faz a busca dos dados via Ajax utilizando
@@ -89,24 +88,22 @@
 			$search = $dados["search"];
 			$limit = intval($dados["length"]);
 			$start = intval($dados["start"]);
-		$count = DB::table("funcionarios")
-		->where("cod_criador",Session::get('cod_criador'))
-		->get();
+		$count = DB::table("funcionarios")->get();
+
 		$recordsTotal = count($count);
 		if($limit == -1)
 			$limit = $recordsTotal;
 		
 		$filtred = DB::table("funcionarios")
 		->where(function($query)use($dados){
-			if($dados["filtro"] != "funcionarios.cod")
-				$query->where($dados["filtro"],"LIKE","%".$dados["valor_buscado"]."%");
-			else if($dados["valor_buscado"] != "")
-				$query->where($dados["filtro"],$dados["valor_buscado"]);
+			if($dados["filters"] != "funcionarios.id")
+				$query->where($dados["filters"],"LIKE","%".$dados["value_search"]."%");
+			else if($dados["value_search"] != "")
+				$query->where($dados["filters"],$dados["value_search"]);
 				
 		})
-		->where("cod_criador",Session::get('cod_criador'))
-		->select("funcionarios.cod","funcionarios.nome as funcionario","funcionarios.nivel",
-			"funcionarios.login")
+		->select("id","fk_fazenda","nome","nivel","login","pw_senha",
+			"email")
 		->orderBy($columns[$orderIndex]["name"],$order["dir"])
 		->get();
 		
@@ -114,15 +111,13 @@
 		
 		$funcionarios = DB::table("funcionarios")
 		->where(function($query)use($dados){
-			if($dados["filtro"] != "funcionarios.cod")
-				$query->where($dados["filtro"],"LIKE","%".$dados["valor_buscado"]."%");
-			else if($dados["valor_buscado"] != "")
-				$query->where($dados["filtro"],$dados["valor_buscado"]);
+			if($dados["filters"] != "funcionarios.id")
+				$query->where($dados["filters"],"LIKE","%".$dados["value_search"]."%");
+			else if($dados["value_search"] != "")
+				$query->where($dados["filters"],$dados["value_search"]);
 				
 		})
-		->where("cod_criador",Session::get('cod_criador'))
-		->select("funcionarios.cod","funcionarios.nome as funcionario","funcionarios.nivel",
-			"funcionarios.login")
+		->select("id","fk_fazenda","nome","nivel","login","pw_senha","email")
 		->orderBy($columns[$orderIndex]["name"],$order["dir"])
 		->take($limit)
 		->skip($start)

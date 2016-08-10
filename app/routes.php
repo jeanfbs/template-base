@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', "HomeController@showIndex");
+Route::get('/', "HomeController@getIndex");
 Route::post('auth','LoginController@autenticar');
 // Route::get('auth',function(){
 // 	return View::make('assets.404');
@@ -25,7 +25,7 @@ Route::group(array('prefix' => 'panel-control'/*,'before' => 'logado'*/),functio
 	
 	// Route::post('perfil','DashboardController@postPerfil');
 	Route::controller('/usuario', "UsuarioController");
-
+	Route::controller('/layout', "HomeController");
 	Route::controller('/funcionario', "UsuarioController");
 });
 // Metodo utilizado igualmente para o

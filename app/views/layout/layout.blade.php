@@ -372,7 +372,6 @@ function DemoTimePicker(){
 <script>
 $(document).ready(function() {
 	$("#tabs").tabs({active: 1});
-	$(document).submit(function(){return false;});
 	$( "#tabs" ).tabs({
 		beforeLoad: function( event, ui ) {
 			title = $(ui.tab).text();

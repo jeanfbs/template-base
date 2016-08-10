@@ -196,9 +196,8 @@ return array(
 
 	// Configurações do sistema
 	
-	"systemName" => "Devoops V1",
+	"systemName" => "AppTools",
 	"languages" => array(
-
 		"português",
 		"english",
 

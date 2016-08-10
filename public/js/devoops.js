@@ -74,14 +74,11 @@ function LoadTimePickerScript(callback){
 //  Dynamically load Bootstrap Validator Plugin
 //  homepage: https://github.com/nghuuphuoc/bootstrapvalidator
 //
-function LoadBootstrapValidatorScript(callback){
+function LoadBootstrapValidatorScript(){
 	if (!$.fn.bootstrapValidator){
-		$.getScript('../plugins/bootstrapvalidator/bootstrapValidator.min.js', callback);
-	}
-	else {
-		if (callback && typeof(callback) === "function") {
-			callback();
-		}
+		$.getScript('../plugins/bootstrapvalidator/bootstrapValidator.min.js', function(){
+			console.log("bootstrapValidator.min.js is loaded...");
+		});
 	}
 }
 //
@@ -1494,27 +1491,27 @@ function SparkLineDrawBarGraph(elem, arr, color){
 //  Helper for open ModalBox with requested header, content and bottom
 //
 //
-function OpenModalBox(header, inner, bottom){
-	var modalbox = $('#modalbox');
-	modalbox.find('.modal-header-name span').html(header);
-	modalbox.find('.devoops-modal-inner').html(inner);
-	modalbox.find('.devoops-modal-bottom').html(bottom);
-	modalbox.fadeIn('fast');
-	$('body').addClass("body-expanded");
-}
-//
-//  Close modalbox
-//
-//
-function CloseModalBox(){
-	var modalbox = $('#modalbox');
-	modalbox.fadeOut('fast', function(){
-		modalbox.find('.modal-header-name span').children().remove();
-		modalbox.find('.devoops-modal-inner').children().remove();
-		modalbox.find('.devoops-modal-bottom').children().remove();
-		$('body').removeClass("body-expanded");
-	});
-}
+// function OpenModalBox(header, inner, bottom){
+// 	var modalbox = $('#modalbox');
+	
+// 	modalbox.find('.devoops-modal-inner').html(inner);
+// 	modalbox.find('.devoops-modal-bottom').html(bottom);
+// 	modalbox.fadeIn('fast');
+// 	$('body').addClass("body-expanded");
+// }
+// //
+// //  Close modalbox
+// //
+// //
+// function CloseModalBox(){
+// 	var modalbox = $('#modalbox');
+// 	modalbox.fadeOut('fast', function(){
+// 		modalbox.find('.modal-header-name span').children().remove();
+// 		modalbox.find('.devoops-modal-inner').children().remove();
+// 		modalbox.find('.devoops-modal-bottom').children().remove();
+// 		$('body').removeClass("body-expanded");
+// 	});
+// }
 //
 //  Beauty tables plugin (navigation in tables with inputs in cell)
 //  Created by DevOOPS.

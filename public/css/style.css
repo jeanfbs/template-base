@@ -7,6 +7,7 @@
 @import url("../plugins/justified-gallery/justifiedGallery.css");
 @import url("../plugins/chartist/chartist.min.css");
 @import url("font-awesome.min.css");
+@import url("file.css");
 
 * {outline:none !important;}
 body {
@@ -307,7 +308,7 @@ a.show-sidebar:hover {
 }
 .box {
   display: block;
-  z-index: 1999;
+  /*z-index: 999;*/
   position: relative;
   border: 1px solid #bbb;
   background: transparent;
@@ -878,7 +879,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
   color: #f8f8f8;
   border-color: #34786E;
 }
-.txt-success, .has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {color: #dedede;}
+.txt-success, .has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {color: #3c7235;}
 .has-success .form-control {border-color: #34786E;}
 .progress-bar-info .ui-widget-header, .bg-info, .btn-info, .btn-info.disabled, .btn-info[disabled], fieldset[disabled] .btn-info, .btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus, .btn-info.disabled:active, .btn-info[disabled]:active, fieldset[disabled] .btn-info:active, .btn-info.disabled.active, .btn-info[disabled].active, fieldset[disabled] .btn-info.active, .progress-bar-info,
 .table > thead > tr > td.info, .table > tbody > tr > td.info, .table > tfoot > tr > td.info, .table > thead > tr > th.info, .table > tbody > tr > th.info, .table > tfoot > tr > th.info, .table > thead > tr.info > td, .table > tbody > tr.info > td, .table > tfoot > tr.info > td, .table > thead > tr.info > th, .table > tbody > tr.info > th, .table > tfoot > tr.info > th {
@@ -1845,6 +1846,15 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 .modal {
   z-index: 2001;
 }
+.modal-header
+{
+  border-radius: 6px;
+  background: #ededed;
+}
+.modal-content
+{
+  box-shadow: 0 3px 9px rgba(255,255,255, .45)
+}
 .fc-event {
   border: 1px solid #6AA6D6;
   background-color: #6AA6D6;
@@ -2041,7 +2051,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 .likebox .fa-thumbs-down {
   color:#D15E5E;
 }
-#modalbox {
+/*#modalbox {
   display:none;
   position: fixed;
   overflow: auto;
@@ -2089,7 +2099,7 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
   overflow: hidden;
   padding: 15px;
   background: #d8d8d8;
-}
+}*/
 #about {
   position: absolute;
   left: 0px;
@@ -2267,3 +2277,71 @@ ul.DTTT_dropdown.dropdown-menu > li:hover > a {
 }
 
 .img-rounded{ border-radius: 100%; }
+table{width:100%!important;}
+.dataTables_scrollHeadInner{width: 100%!important;}
+
+
+.divider{background-color: #3e4a37!important;}
+.fixed-height{max-height: 12em;overflow-y:scroll; }
+.popover-title{background-color: #518d3a;color:#fff;}
+.popover-content{font-weight: normal;}
+.row-categoria{background-color: #f4edcb!important;}
+.row-adicional{background-color: #e3ebfc!important;}
+table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+}
+ 
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
+}
+table.dataTable thead th.sorting:after {
+    content: "\f0dc";
+    color: blue;
+    font-size: 0.85em;
+    padding-top: 0.12em;
+}
+table.dataTable thead th.sorting_asc:after {
+    content: "\f0de";
+    color: green;
+}
+table.dataTable thead th.sorting_desc:after {
+    content: "\f0dd";
+    color: green;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+.table-scroller{max-height: 15em;overflow-y:scroll; }
+
+.view,.editar,.del{cursor: pointer;}

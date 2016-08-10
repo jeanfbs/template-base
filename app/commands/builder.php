@@ -54,12 +54,9 @@ class builder extends Command {
 			}
 			$this->info("DataBase: ".strtoupper(DB::connection()->getDatabaseName())." connected!");
 			$table_info_columns = DB::select( DB::raw('SHOW COLUMNS FROM '.$tabela));
-
-			$ftool = new FormToolKit($this,$table_info_columns);
+			$ftool = new FormToolKit($this,$table_info_columns,$tabela);
 			$ftool->setFileName($this->option("f"));
-			$ftool->createDir();
-			$ftool->generatePageHome();
-			$ftool->createTabCadastro();
+			$ftool->builder();
 			
 		}
 		else if($drive == "pgsql")

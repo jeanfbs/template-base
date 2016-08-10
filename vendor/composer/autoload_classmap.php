@@ -9,7 +9,7 @@ return array(
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'FormToolKit' => $baseDir . '/app/libraries/FormToolKit/FormToolKit.php',
-    'HTMLBuilder' => $baseDir . '/app/libraries/FormToolKit/HTMLBuilder.php',
+    'HTMLFieldsForm' => $baseDir . '/app/libraries/FormToolKit/HTMLFieldsForm.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'LangToolKit' => $baseDir . '/app/libraries/LangToolKit/LangToolKit.php',

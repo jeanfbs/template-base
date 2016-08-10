@@ -58,8 +58,8 @@
 <div style="height: 40px;"></div>
 <script>
 $(document).ready(function() {
-	$("#tabs").tabs({active: 0});
-	$(document).submit(function(){return false;});
+	$("#tabs").tabs({active: 1});
+	
 	$( "#tabs" ).tabs({
 		beforeLoad: function( event, ui ) {
 			title = $(ui.tab).text();

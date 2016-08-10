@@ -7,10 +7,11 @@
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="{{url('favicon.ico')}}">
-
+		
 		<link href="{{url('css/style.css')}}" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-		
+		<link rel="stylesheet" type="text/css" href="{{url('plugins/datatables/css/dataTables.bootstrap.min.css')}}">
+		<link href="{{url('css/alertas.css')}}" rel="stylesheet">
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<!--<script src="http://code.jquery.com/jquery.js"></script>-->
@@ -20,6 +21,9 @@
 		<script src="{{url('plugins/bootstrap/bootstrap.min.js')}}"></script>
 		<script src="{{url('plugins/justified-gallery/jquery.justifiedGallery.min.js')}}"></script>
 		<!-- All functions for this theme + document.ready processing -->
+		<script src="{{url('plugins/bootstrapvalidator/bootstrapValidator.min.js')}}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{url('plugins/datatables/js/jquery.dataTables.js')}}"></script>
+		<script src="{{url('plugins/datatables/js/dataTables.bootstrap.min.js')}}"></script>
 		<script src="{{url('js/utilidade.js')}}" type="text/javascript" charset="utf-8"></script>
 		<script src="{{url('js/alertas.js')}}" type="text/javascript" charset="utf-8"></script>
 		<script src="{{url('js/devoops.js')}}"></script>
@@ -179,21 +183,23 @@
 						<span class="hidden-xs">Usuario</span>
 					</a>
 				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle">
-						<i class="fa fa-bar-chart-o"></i>
-						<span class="hidden-xs">Charts</span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="ajax/charts_xcharts.html">xCharts</a></li>
-						<li><a href="ajax/charts_flot.html">Flot Charts</a></li>
-						<li><a href="ajax/charts_google.html">Google Charts</a></li>
-						<li><a href="ajax/charts_morris.html">Morris Charts</a></li>
-						<li><a href="ajax/charts_amcharts.html">AmCharts</a></li>
-						<li><a href="ajax/charts_chartist.html">Chartist</a></li>
-						<li><a href="ajax/charts_coindesk.html">CoinDesk realtime</a></li>
-					</ul>
-				</li>
+				@if(Session::get("nivel") != 1)
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle">
+							<i class="fa fa-bar-chart-o"></i>
+							<span class="hidden-xs">Charts</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="ajax/charts_xcharts.html">xCharts</a></li>
+							<li><a href="ajax/charts_flot.html">Flot Charts</a></li>
+							<li><a href="ajax/charts_google.html">Google Charts</a></li>
+							<li><a href="ajax/charts_morris.html">Morris Charts</a></li>
+							<li><a href="ajax/charts_amcharts.html">AmCharts</a></li>
+							<li><a href="ajax/charts_chartist.html">Chartist</a></li>
+							<li><a href="ajax/charts_coindesk.html">CoinDesk realtime</a></li>
+						</ul>
+					</li>
+				@endif
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle">
 						<i class="fa fa-table"></i>
