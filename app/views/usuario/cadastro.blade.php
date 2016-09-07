@@ -1,300 +1,91 @@
 <div class="box-content">
-	<h4 class="page-header">{{trans('geral.header_usuario')}}</h4>
-{{Form::open(array('class' => 'form-horizontal ','id' => 'cadastro','files' => true))}}
-		<div class="form-group">
-			<label class="col-sm-2 control-label">First name</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" placeholder="First name" data-toggle="tooltip" data-placement="bottom" title="Tooltip for name">
-			</div>
-			<label class="col-sm-2 control-label">Last name</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" placeholder="Last name" data-toggle="tooltip" data-placement="bottom" title="Tooltip for last name">
+	<h4 class="page-header">{{trans(Config::get("app.locale").'.new_register')}}</h4>
+{{Form::open(array('url' => 'panel-control/usuario/cadastrar','class' => 'form-horizontal ',
+'id' => 'form_usuario','files' => true))}}
+				<div class='form-group'>
+			<label for='id_nome' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.nome')}}</label>
+
+			<div class='col-sm-6'>
+				<input type='text' name='nome' id='id_nome' class='form-control required' maxlength='70' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".nome")}}' notEmpty='{{trans(Config::get("app.locale").".nome")}} {{trans(Config::get("app.locale").".required")}}'>
 			</div>
 		</div>
-		<div class="form-group has-success has-feedback">
-			<label class="col-sm-2 control-label">Company</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" placeholder="Company">
-			</div>
-			<label class="col-sm-2 control-label">Address</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" placeholder="Address">
-				<span class="fa fa-check-square-o txt-success form-control-feedback"></span>
+		<div class='form-group'>
+			<label for='id_telefone' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.telefone')}}</label>
+
+			<div class='col-sm-4'>
+				<input type='text' name='telefone' id='id_telefone' class='form-control required' maxlength='40' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".telefone")}}' notEmpty='{{trans(Config::get("app.locale").".telefone")}} {{trans(Config::get("app.locale").".required")}}'>
 			</div>
 		</div>
-		<div class="form-group has-warning has-feedback">
-			<label class="col-sm-2 control-label">Residence</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" placeholder="City">
-				<span class="fa fa-key txt-warning form-control-feedback"></span>
+		<div class='form-group'>
+			<label for='id_email' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.email')}}</label>
+
+			<div class='col-sm-6'>
+				<input type='text' name='email' id='id_email' class='form-control required' maxlength='70' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".email")}}' notEmpty='{{trans(Config::get("app.locale").".email")}} {{trans(Config::get("app.locale").".required")}}'>
 			</div>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" placeholder="Country">
-				<span class="fa fa-frown-o txt-danger form-control-feedback"></span>
+		</div>
+		<div class='form-group'>
+			<label for='id_login' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.login')}}</label>
+
+			<div class='col-sm-6'>
+				<input type='text' name='login' id='id_login' class='form-control required' maxlength='70' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".login")}}' notEmpty='{{trans(Config::get("app.locale").".login")}} {{trans(Config::get("app.locale").".required")}}'>
 			</div>
-			<label class="col-sm-1 control-label">CODE</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" placeholder="Another info" data-toggle="tooltip" data-placement="top" title="Hello world!">
+		</div>
+		<div class='form-group'>
+			<label for='id_senha' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.senha')}}</label>
+
+			<div class='col-sm-3'>
+				<input type='password' name='pw_senha' id='id_senha' class='form-control required' data-toggle='tooltip' data-placement='bottom' title='Senha' notEmpty='{{trans(Config::get("app.locale").".senha")}} {{trans(Config::get("app.locale").".required")}}' identical='Valores diferentes'>
 			</div>
-			<div class="col-sm-2">
-				<div class="checkbox">
+
+			<label class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.confirm')}}</label>
+
+			<div class='col-sm-3'>
+
+				<input type='password' class='form-control required' name='confirmacao' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".confirm")}}' notEmpty='{{trans(Config::get("app.locale").".senha")}} {{trans(Config::get("app.locale").".required")}}' identical='Valores diferentes'>
+			</div>
+
+			<div class='col-sm-2'>
+				<div class='checkbox'>
 					<label>
-						<input type="checkbox" checked> No exist
-						<i class="fa fa-square-o small"></i>
+						<input type='checkbox' id='mostrar_senha'>{{trans(Config::get('app.locale').'.show_pass')}}
+						<i class='fa fa-square-o small'></i>
 					</label>
 				</div>
 			</div>
 		</div>
-		<div class="form-group has-warning has-feedback">
-			<label class="col-sm-2 control-label">Select you OS</label>
-			<div class="col-sm-4">
-				<select id="s2_with_tag" multiple="multiple" class="populate placeholder">
-					<option>Linux</option>
-					<option>Windows</option>
-					<option>OpenSolaris</option>
-					<option>FirefoxOS</option>
-					<option>MeeGo</option>
-					<option>Android</option>
-					<option>Sailfish OS</option>
-					<option>Plan9</option>
-					<option>DOS</option>
-					<option>AIX</option>
-					<option>HP/UP</option>
-				</select>
+		<div class='form-group'>
+			<label for='id_tipo' class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.tipo')}}</label>
+
+			<div class='col-sm-2'>
+				<input type='text' name='tipo' id='id_tipo' class='form-control required'  maxlength='15' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get("app.locale").".tipo")}}' notEmpty='{{trans(Config::get("app.locale").".tipo")}} {{trans(Config::get("app.locale").".required")}}'>
 			</div>
-			<label class="col-sm-2 control-label">Tooltip for inputs</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" placeholder="Another info" data-toggle="tooltip" data-placement="top" title="Hello world!">
+			<div class='form-group'>
+
+			<div class='col-sm-offset-2 col-sm-10'>
+
+				<img style='max-width: 100px; max-height: 100px;' id='thumbnail'/><br><br>
+
+				<div class='btn btn-primary btn-xs btn-file'> <i class='fa fa-camera'></i> {{trans(Config::get('app.locale').'.add_picture')}}<input  type='file' name='img_foto' class='file imagem'></div>
+
 			</div>
-			<span class="help-inline col-xs-12 col-sm-2">
-				<span class="middle txt-default">only example</span>
-			</span>
-		</div>
-		<div class="form-group has-error has-feedback">
-			<label class="col-sm-2 control-label">Date</label>
-			<div class="col-sm-2">
-				<input type="text" id="input_date" class="form-control" placeholder="Date">
-				<span class="fa fa-calendar txt-danger form-control-feedback"></span>
-			</div>
-			<div class="col-sm-2">
-				<input type="text" id="input_time" class="form-control" placeholder="Time">
-				<span class="fa fa-clock-o txt-danger form-control-feedback"></span>
-			</div>
-			<label class="col-sm-2 control-label">Disabled input</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" placeholder="No info" data-toggle="tooltip" data-placement="top" title="Hello world!" disabled>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="form-styles">Relative Sizing</label>
-			<div class="col-sm-10">
-				<div class="row">
-					<div class="col-sm-2">
-						<input class="form-control" id="form-styles" placeholder=".col-sm-2" type="text">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<p><small>Dynamic resizing col</small></p>
-						<div class="progress progress-ui">
-							  <div class="progress-bar progress-bar-success slider-style slider-range-min" style="width: 100%;"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="form-styles">Textarea</label>
-			<div class="col-sm-10">
-					<textarea class="form-control" rows="5" id="wysiwig_simple"></textarea>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="form-styles">Extreme Textarea</label>
-			<div class="col-sm-10">
-					<textarea class="form-control" rows="5" id="wysiwig_full"></textarea>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Input groups</label>
-			<div class="col-sm-2">
-				<div class="input-group">
-				  <span class="input-group-addon"><i class="fa fa-github-square"></i></span>
-				  <input type="text" class="form-control" placeholder="GitHub">
-				</div>
-			</div>
-			<div class="col-sm-2">
-				<div class="input-group">
-				  <input type="text" class="form-control" placeholder="Group">
-				  <span class="input-group-addon"><i class="fa fa-group"></i></span>
-				</div>
-			</div>
-			<div class="col-sm-2">
-				<div class="input-group">
-				  <span class="input-group-addon"><i class="fa fa-money"></i></span>
-				  <input type="text" class="form-control" placeholder="Money">
-				  <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-				</div>
-			</div>
-		</div>
+
+		</div>		</div>
+
 		<div class="clearfix"></div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-2">
-				<button type="cancel" class="btn btn-default btn-label-left btn-xs">
-				<span><i class="fa fa-clock-o txt-danger"></i></span>
-					Cancel
-				</button>
-			</div>
-			<div class="col-sm-2">
-				<button type="submit" class="btn btn-warning btn-label-left btn-xs">
-				<span><i class="fa fa-clock-o"></i></span>
-					Send later
+				<button type="cancel" class="btn btn-default btn-label-left btn-xs" id="cc">
+				<span><i class="fa fa-times"></i></span>
+					{{trans(Config::get("app.locale").'.button_cancel')}}
 				</button>
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" class="btn btn-primary btn-label-left btn-xs">
-				<span><i class="fa fa-clock-o"></i></span>
-					Submit
+				<span><i class="fa fa-check"></i></span>
+					{{trans(Config::get("app.locale").'.button_save')}}
 				</button>
 			</div>
 		</div>
 	{{Form::close()}}
-
-	<form id="defaultForm" method="post" action="validators.html" class="form-horizontal">
-					<fieldset>
-						<legend>Not Empty validator</legend>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Username</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" name="username" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Country</label>
-							<div class="col-sm-5">
-								<select class="populate placeholder" name="country" id="s2_country">
-									<option value="">-- Select a country --</option>
-									<option value="fr">France</option>
-									<option value="de">Germany</option>
-									<option value="it">Italy</option>
-									<option value="jp">Japan</option>
-									<option value="ru">Russia</option>
-									<option value="gb">United Kingdom</option>
-									<option value="us">United State</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-9 col-sm-offset-3">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"  name="acceptTerms" /> Accept the terms and policies
-										<i class="fa fa-square-o small"></i>
-									</label>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Regular expression based validators</legend>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Email address</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" name="email" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Website</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" name="website" placeholder="http://" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Phone number</label>
-							<div class="col-sm-5">
-								<input type="text" class="form-control" name="phoneNumber" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Hex color</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" name="color" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">US zip code</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" name="zipCode" />
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Identical validator</legend>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Password</label>
-							<div class="col-sm-5">
-								<input type="password" class="form-control" name="password" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Retype password</label>
-							<div class="col-sm-5">
-								<input type="password" class="form-control" name="confirmPassword" />
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Other validators</legend>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Ages</label>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" name="ages" />
-							</div>
-						</div>
-					</fieldset>
-					<div class="form-group">
-						<div class="col-sm-9 col-sm-offset-3">
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-				</form>
 </div>
-
-<script type="text/javascript">
-// Run Select2 plugin on elements
-function DemoSelect2(){
-	$('#s2_with_tag').select2({placeholder: "Select OS"});
-	$('#s2_country').select2();
-}
-// Run timepicker
-function DemoTimePicker(){
-	$('#input_time').timepicker({setDate: new Date()});
-}
-</script>
-<script>
-$(document).ready(function() {
-	
-	// Add slider for change test input length
-	FormLayoutExampleInputLength($( ".slider-style" ));
-	// Initialize datepicker
-	$('#input_date').datepicker({setDate: new Date()});
-	// Load Timepicker plugin
-	LoadTimePickerScript(DemoTimePicker);
-	// Add tooltip to form-controls
-	$('.form-control').tooltip();
-	LoadSelect2Script(DemoSelect2);
-	// Load example of form validation
-	LoadBootstrapValidatorScript(DemoFormValidator);
-	// Add drag-n-drop feature to boxes
-	WinMove();
-/*------------------------------------------------------------------------
-|	A função abaixo verifica a cada vez que o 
-|	documento HTML e carregado se foi enviado
-|	uma mensagem do servidor de erro ou de
-|	alguma operação feita
-|------------------------------------------------------------------------*/
-		setTimeout(function(){
-			alerta();
-		},1000);
-});
-</script>
+<script src="{{url('js/usuario/cadastro.js')}}" type="text/javascript" charset="utf-8"></script>

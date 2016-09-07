@@ -40,8 +40,13 @@ class builder extends Command {
 		
 		$drive = Config::get("database.default");
 		DB::disconnect("cowaerdb");
+		if($this->option("r") != null)
+		{
+			exec("rm -rf ".base_path()."/app/views/".$this->option("r")." ".base_path()."/public/js/".$this->option("r"));
+			$this->info("All files from ".$this->option("r")." directory has deleted!");
+			die();
+		}
 		$this->info("DataBase Drive available: ".strtoupper($drive));
-
 		if($drive == "mysql")
 		{
 			
@@ -85,6 +90,7 @@ class builder extends Command {
 	protected function getOptions()
 	{
 		return array(
+			array('r', null, InputOption::VALUE_REQUIRED, 'Nome Diretorio', null),
 			array('t', null, InputOption::VALUE_REQUIRED, 'Nome Tabela', null),
 			array('f', null, InputOption::VALUE_REQUIRED, 'Nome Arquivo', null),
 		);

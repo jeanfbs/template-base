@@ -11,7 +11,7 @@ $(document).ready(function() {
 /*----------------------------------------------------------------------
 |	DataTable Plugin Function
 ------------------------------------------------------------------------*/
-	var dataTable = $('#tabela_$filename').DataTable( {
+	var dataTable = $('#tabela_usuario').DataTable( {
 				"lengthMenu": [[10,25,50, -1], [10,25,50, $("#translate").attr("t")]],// modifica qtd de resultados por pagina
 				"aaSorting": [[ 0, "asc" ]],// indice da coluna para a ordenação no init da DataTable
 				"scrollX": true,
@@ -29,7 +29,7 @@ $(document).ready(function() {
 				"bServerSide": true,// faz com que o processamento seja do lado do servidor
 				// Ajax propriedades
 				"ajax":{
-					"url":localStorage.getItem("baseUrl")+"/panel-control/$filename/pesquisa",
+					"url":localStorage.getItem("baseUrl")+"/panel-control/usuario/pesquisa",
 					"type":"POST",
 					"data":function(d){
 					d.value_search = $("#value_search").val();
@@ -38,7 +38,14 @@ $(document).ready(function() {
 			},
 			// Colunas propriedades
 			"columns": [
-			$columns
+			{ "name": "id","width":"45px" },
+				{ "name": "nome","width":"300px" },
+				{ "name": "telefone","width":"200px" },
+				{ "name": "email","width":"300px" },
+				{ "name": "login","width":"300px" },
+				{ "name": "pw_senha","width":"400px" },
+				{ "name": "tipo","width":"150px" },
+				
 			    {
 			    	"data":null,
 			    	"width":"100px",
@@ -58,7 +65,7 @@ $('#value_search').on("keyup",function(e) {
  // Array de ids das linhas que irão mostrar os detalhes
     var detailRows = [];
  
-    $('#tabela_$filename tbody').off("click",".view").on( 'click', '.view', function () {
+    $('#tabela_usuario tbody').off("click",".view").on( 'click', '.view', function () {
 
         var tr = $(this).closest('tr');
         var row = dataTable.row( tr );
@@ -86,7 +93,7 @@ $('#value_search').on("keyup",function(e) {
             $.ajax({
 
 		    type: "GET",
-		    url : localStorage.getItem("baseUrl")+"/panel-control/$filename/editar",
+		    url : localStorage.getItem("baseUrl")+"/panel-control/usuario/editar",
 		    data : {codigo:codigo},
 		    dataType: 'json'
 		    }).done(function(res){
@@ -111,10 +118,101 @@ $('#value_search').on("keyup",function(e) {
 /*------------------------------------------------------------------------
 |	Validador do formulario de edição
 |------------------------------------------------------------------------*/
-$('#form_edit_$filename').bootstrapValidator({
+$('#form_edit_usuario').bootstrapValidator({
 	message: '',
 	fields: {
-		$validators
+					nome: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_nome').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			telefone: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_telefone').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			email: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_email').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			login: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_login').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			senha: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_senha').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			tipo: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_tipo').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+			foto: {
+
+					validators: {
+
+						notEmpty: {
+
+							message: $('#id_foto').attr('notEmpty')
+
+						}
+
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},
+
 	}
 });
 
@@ -125,17 +223,24 @@ $('#form_edit_$filename').bootstrapValidator({
 |------------------------------------------------------------------------*/
 $(document).off("click",".editar").on("click",".editar",function(){
 
-	$("#modal_edit_$filename").modal("show");
+	$("#modal_edit_usuario").modal("show");
 	var codigo = parseInt($(this).parents("tr").children("td:eq(0)").text(),10);
 	$.ajax({
     type: "GET",
-    url : localStorage.getItem("baseUrl")+"/panel-control/$filename/editar",
+    url : localStorage.getItem("baseUrl")+"/panel-control/usuario/editar",
     data : {codigo:codigo},
     dataType: 'json'
     }).done(function(res){
     	$("#titulo_modal").html("<b style='color:#d15e5e;'>"+res[0].nome.toUpperCase()+"</b>");
-    	$("#edit_cod_$filename").val(codigo);
-    	$editFields
+    	$("#edit_cod_usuario").val(codigo);
+    			$('input[name=nome]').val(res[0].nome);
+		$('input[name=telefone]').val(res[0].telefone);
+		$('input[name=email]').val(res[0].email);
+		$('input[name=login]').val(res[0].login);
+		$('input[name=pw_senha]').val(res[0].pw_senha);
+		$('input[name=tipo]').val(res[0].tipo);
+		$('input[name=img_foto]').val(res[0].img_foto);
+
     });
 
 });
@@ -143,16 +248,16 @@ $(document).off("click",".editar").on("click",".editar",function(){
 /*------------------------------------------------------------------------
 |	Função de salvar edição
 |------------------------------------------------------------------------*/
-$("#save_edit_$filename").off("click").on("click",function(){
+$("#save_edit_usuario").off("click").on("click",function(){
 
 	/* valida o formulario para: Campos vazios ou senhas diferentes*/
-	if($("#form_edit_$filename .required").validation())
+	if($("#form_edit_usuario .required").validation())
 	{
 		alertErro($("#translate").attr("emptyFields"));
 		return false;
 	}
 	
-	$("#form_edit_$filename").submit();
+	$("#form_edit_usuario").submit();
 });
 
 /*------------------------------------------------------------------------
@@ -167,7 +272,7 @@ $(document).off("click",".del").on("click",".del",function(){
 	var id = parseInt($(this).parents("tr").children("td:eq(0)").text(),10);
 	$.ajax({
 		type: "GET",
-	    url: localStorage.getItem("baseUrl")+"/panel-control/$filename/deletar",
+	    url: localStorage.getItem("baseUrl")+"/panel-control/usuario/deletar",
 	    data: {id:id}
     }).done(function(res){
     	

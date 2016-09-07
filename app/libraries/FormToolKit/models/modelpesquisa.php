@@ -1,5 +1,3 @@
-
-
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box-content no-padding">
@@ -35,17 +33,13 @@
 
 				{{Form::close()}}
 			<div class="table-responsive">
-				<table class="table table-bordered table-striped table-hover" id="tabela_$filename" t="{{trans(Config::get('app.locale').'.all')}}"
-				tipview = "{{trans(Config::get('app.locale').'.tooltip_view')}}" tipedit = "{{trans(Config::get('app.locale').'.tooltip_edit')}}" tipdel = "{{trans(Config::get('app.locale').'.tooltip_del')}}"
-				>
+				<table class="table table-bordered table-striped table-hover" id="tabela_$filename">
 					<thead>
 						<tr class="active">
 							$header_table
 						</tr>
 					</thead>
-					<tbody sZeroRecords="{{trans(Config::get('app.locale').'.sZeroRecords')}}"
-					sInfo="{{trans(Config::get('app.locale').'.sInfo')}}" sInfoEmpty="{{trans(Config::get('app.locale').'.sInfoEmpty')}}"
-					sInfoFiltered="{{trans(Config::get('app.locale').'.sInfoFiltered')}}" sProcessing="{{trans(Config::get('app.locale').'.sProcessing')}}">
+					<tbody>
 					
 					</tbody>
 					
@@ -56,28 +50,25 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="modal_edit">
-  <div class="modal-dialog  modal-lg" role="document">
-    <div class="modal-content">
+<div class="modal fade" id="modal_edit_$filename" tabindex="-1" role="dialog" aria-labelledby="modal_edit_$filename">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
       <div class="modal-header devoops-modal-header">
+      	<button type="button" class="close close-modal" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
         <div class="modal-header-name">
 			<h4 class="modal-title">{{trans(Config::get("app.locale").'.title_modal')}} <span id="title_modal"><span></h4>
 		</div>
-		<div class="box-icons">
-			<a class="close-link">
-				<i class="fa fa-times"></i>
-			</a>
-		</div>
       </div>
       <div class="modal-body devoops-modal-inner">
-        {{Form::open(array('url' => 'panel-control/$filename/cadastrar','class' => 'form-horizontal ',
-'id' => 'modal_edit_$filename','files' => TRUE, 'empty_fields' => Lang::get(Config::get("app.locale").".empty_fields")))}}
+        {{Form::open(array('url' => 'panel-control/$filename/editar','class' => 'form-horizontal ',
+'id' => 'form_edit_$filename','files' => true))}}
+			<input type="hidden" id="edit_cod_$filename" name="edit_cod_$filename">
 			$modal_fields
 		{{Form::close()}}
       </div>
       <div class="modal-footer devoops-modal-bottom">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{trans('geral.button_cancel')}}</button>
-        <button type="button" class="btn btn-primary" id="salvar_edicao">{{trans('geral.button_save')}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{trans(Config::get("app.locale").'.button_cancel')}}</button>
+        <button type="button" class="btn btn-primary" id="save_edit_$filename">{{trans(Config::get("app.locale").'.button_save')}}</button>
       </div>
     </div>
   </div>

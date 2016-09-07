@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
+		
 		<meta charset="utf-8">
 		<title>@yield('title')</title>
 		<meta name="description" content="">
@@ -8,7 +9,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="{{url('favicon.ico')}}">
 		
-		<link href="{{url('css/style.css')}}" rel="stylesheet">
+
+		<link href="{{url('css/style.less')}}" rel="stylesheet/less" type="text/css">
 		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="{{url('plugins/datatables/css/dataTables.bootstrap.min.css')}}">
 		<link href="{{url('css/alertas.css')}}" rel="stylesheet">
@@ -27,10 +29,18 @@
 		<script src="{{url('js/utilidade.js')}}" type="text/javascript" charset="utf-8"></script>
 		<script src="{{url('js/alertas.js')}}" type="text/javascript" charset="utf-8"></script>
 		<script src="{{url('js/devoops.js')}}"></script>
+		<script src="{{url('js/less.min.js')}}"></script>
 
 		<script>
 		    $(document).ready(function(){
-			  $(document).tooltip({selector:'*[data-toggle="tooltip"]'});
+
+		    	
+		    	if(localStorage.getItem("baseUrl") !== null)
+		    	{
+		    		localStorage.setItem("baseUrl",document.URL.split("public/")[0]+"public/");
+		    	}
+
+			  $(document).tooltip({selector:'*[data-toggle="tooltip"]',delay:{'show':1000}});
 			});
 		</script> 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -66,11 +76,26 @@
     </style>
 	</head>
 <body>
-
-<div class="loadajax" id="ajaxLoading">
+<div id="translate" 
+t="{{trans(Config::get('app.locale').'.all')}}"
+tipview = "{{trans(Config::get('app.locale').'.tooltip_view')}}" 
+tipedit = "{{trans(Config::get('app.locale').'.tooltip_edit')}}" 
+tipdel = "{{trans(Config::get('app.locale').'.tooltip_del')}}"
+sZeroRecords="{{trans(Config::get('app.locale').'.sZeroRecords')}}"
+sInfo="{{trans(Config::get('app.locale').'.sInfo')}}" 
+sInfoEmpty = "{{trans(Config::get('app.locale').'.sInfoEmpty')}}"
+sInfoFiltered = "{{trans(Config::get('app.locale').'.sInfoFiltered')}}" 
+sProcessing = "{{trans(Config::get('app.locale').'.sProcessing')}}"
+emptyFields = "{{trans(Config::get('app.locale').'.empty_fields')}}"
+delMessage="{{trans(Config::get('app.locale').'.confirm_delete')}}"	
+sucessMessage="{{trans(Config::get('app.locale').'.msg_sucess')}}"
+warningMessage="{{trans(Config::get('app.locale').'.msg_error')}}"
+errorMessage="{{trans(Config::get('app.locale').'.msg_warning')}}"
+/>
+<!-- <div class="loadajax" id="ajaxLoading">
   <img src="{{url('img/devoops_getdata.gif')}}" class="devoops-getdata" alt="Aguarde..."/>
   <h2>{{trans('geral.aguarde')}}</h2>
-</div>
+</div> -->
 <!--Start Header-->
 <header class="navbar">
 	<div class="container-fluid expanded-panel">
@@ -178,9 +203,9 @@
 					</a>
 				</li>
 				<li>
-					<a href="{{url('panel-control/usuario')}}">
+					<a href="{{url('panel-control/paciente')}}">
 						<i class="fa fa-users"></i>
-						<span class="hidden-xs">Usuario</span>
+						<span class="hidden-xs">Paciente</span>
 					</a>
 				</li>
 				@if(Session::get("nivel") != 1)

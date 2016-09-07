@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-/*  imports Plugins */
 $('#form_$filename').bootstrapValidator({
 	message: '',
 	fields: {

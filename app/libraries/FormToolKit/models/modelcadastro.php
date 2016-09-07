@@ -1,7 +1,7 @@
 <div class="box-content">
 	<h4 class="page-header">{{trans(Config::get("app.locale").'.new_register')}}</h4>
 {{Form::open(array('url' => 'panel-control/$filename/cadastrar','class' => 'form-horizontal ',
-'id' => 'form_$filename','files' => TRUE, 'empty_fields' => Lang::get(Config::get("app.locale").".empty_fields")))}}
+'id' => 'form_$filename','files' => true))}}
 		$campos
 		<div class="clearfix"></div>
 		<div class="form-group">

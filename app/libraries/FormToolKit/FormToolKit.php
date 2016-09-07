@@ -1,10 +1,14 @@
 <?php 
 
+/********************************************************
+* 	Generate Class Front-End  from Artisan Command
+*
+*	@author: Jean Fabricio<jeanufu21@gmail.com>
+*	@since: 07.09.2016
+*	@version: 1.0
+*********************************************************/
 
-/**
-* 	Classe que irá gerar os arquivos dos formularios
-*	no artisan
-*/
+
 class FormToolKit
 {
 	const LIMIT_COL_TABLE = 6;
@@ -105,8 +109,11 @@ class FormToolKit
 			$explode = explode("(",$value->Type);
 			if(isset($explode[0]))
 			{
+
 				$td = $explode[0];
-				$size = intval($explode[1]);
+				if(isset($explode[1]))
+					$size = intval($explode[1]);
+				
 
 				if(preg_match('/fk_/', $value->Field))
 				{
@@ -139,7 +146,7 @@ class FormToolKit
 					$htm->incLimit(4);
 					$tmp = str_replace("img_", "", $value->Field);
 					$this->lgtool->addValue(strtolower($tmp),ucfirst($tmp));
-					$inputs .= $htm->pictureField(ucfirst($tmp));
+					$inputs .= $htm->pictureField(ucfirst($value->Field));
 				}
 				else if(preg_match("/int/",$td) && !preg_match("/id/",$value->Field))
 				{
@@ -236,7 +243,7 @@ class FormToolKit
 			}
 			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
 			{
-				$validators .= "\t\t\t$tmp: {\n
+				$validators .= "\t\t\t$value->Field: {\n
 					validators: {\n
 						notEmpty: {\n
 							message: $('#id_".strtolower($tmp)."').attr('notEmpty')\n
@@ -326,7 +333,8 @@ class FormToolKit
 				if(isset($explode[0]))
 				{
 					$td = $explode[0];
-					$size = intval($explode[1]);
+					if(isset($explode[1]))
+						$size = intval($explode[1]);
 
 					if(preg_match("/int/",$td))
 					$columnsjs .= '{ "name": "'.$value->Field.'","width":"45px" },'."\n\t\t\t\t";
@@ -364,6 +372,60 @@ class FormToolKit
 		}
 
 		$content = str_replace('$columns',$columnsjs, $content);
+
+		// criar o validador para o formulario de edição
+		$validators = "";
+
+		foreach ($this->table_info_column as $key => $value) {
+			$tmp = $value->Field;
+			if(preg_match("/pw_/",$value->Field))
+			{
+				$tmp = str_replace("pw_", "", $value->Field);
+			}
+			else if(preg_match("/img_/",$value->Field))
+			{
+				$tmp = str_replace("img_", "", $value->Field);
+			}
+			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
+			{
+				$validators .= "\t\t\t$value->Field: {\n
+					validators: {\n
+						notEmpty: {\n
+							message: $('#id_".strtolower($tmp)."').attr('notEmpty')\n
+						}\n
+						/* others fields how identical for password, max-lenght, min.lenght*/
+					}
+				},\n";
+			}
+		}
+
+		$content = str_replace('$validators',$validators, $content);
+		
+		$editFields = "";
+
+		foreach ($this->table_info_column as $key => $value) {
+			$tmp = $value->Field;
+			if(preg_match("/pw_/",$value->Field))
+			{
+				$tmp = str_replace("pw_", "", $value->Field);
+			}
+			else if(preg_match("/img_/",$value->Field))
+			{
+				$tmp = str_replace("img_", "", $value->Field);
+			}
+			else if(preg_match('/fk_/', $value->Field))
+			{
+				$editFields .= "\t\t$('select[name=".strtolower($value->Field)."]').val(res[0].".strtolower($value->Field).");\n";
+			}
+
+			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
+			{
+
+				$editFields .= "\t\t$('input[name=".strtolower($value->Field)."]').val(res[0].".strtolower($value->Field).");\n";
+			}
+		}
+
+		$content = str_replace('$editFields',$editFields, $content);
 		
 		file_put_contents($file,$content);
 		chmod($file,0777);
