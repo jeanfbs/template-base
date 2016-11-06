@@ -61,7 +61,7 @@ return array(
 		
 		$file = base_path()."/app/lang/".Config::get("app.locale")."/".Config::get("app.locale").".php";
 		
-		file_put_contents($file,$str);
+		file_put_contents($file,"\xEF\xBB\xBF".$str);
 		
 		if(!file_exists($file))
 		{

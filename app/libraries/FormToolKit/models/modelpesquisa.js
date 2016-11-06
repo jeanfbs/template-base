@@ -25,11 +25,10 @@ $(document).ready(function() {
 					"sProcessing":$("#translate").attr("sProcessing")
 
 				},
-				"bProcessing": true,// mostra o icone de processando...
 				"bServerSide": true,// faz com que o processamento seja do lado do servidor
 				// Ajax propriedades
 				"ajax":{
-					"url":localStorage.getItem("baseUrl")+"/panel-control/$filename/pesquisa",
+					"url":localStorage.getItem("baseUrl")+"panel-control/$filename/pesquisa",
 					"type":"POST",
 					"data":function(d){
 					d.value_search = $("#value_search").val();
@@ -86,7 +85,7 @@ $('#value_search').on("keyup",function(e) {
             $.ajax({
 
 		    type: "GET",
-		    url : localStorage.getItem("baseUrl")+"/panel-control/$filename/editar",
+		    url : localStorage.getItem("baseUrl")+"panel-control/$filename/editar",
 		    data : {codigo:codigo},
 		    dataType: 'json'
 		    }).done(function(res){
@@ -129,7 +128,7 @@ $(document).off("click",".editar").on("click",".editar",function(){
 	var codigo = parseInt($(this).parents("tr").children("td:eq(0)").text(),10);
 	$.ajax({
     type: "GET",
-    url : localStorage.getItem("baseUrl")+"/panel-control/$filename/editar",
+    url : localStorage.getItem("baseUrl")+"panel-control/$filename/editar",
     data : {codigo:codigo},
     dataType: 'json'
     }).done(function(res){
@@ -143,6 +142,8 @@ $(document).off("click",".editar").on("click",".editar",function(){
 /*------------------------------------------------------------------------
 |	Função de salvar edição
 |------------------------------------------------------------------------*/
+
+
 $("#save_edit_$filename").off("click").on("click",function(){
 
 	/* valida o formulario para: Campos vazios ou senhas diferentes*/
@@ -151,8 +152,26 @@ $("#save_edit_$filename").off("click").on("click",function(){
 		alertErro($("#translate").attr("emptyFields"));
 		return false;
 	}
-	
-	$("#form_edit_$filename").submit();
+
+		var dados = $("#form_edit_$filename").serializeArray();
+		$.ajax({
+			type: "POST",
+	        url : localStorage.getItem("baseUrl")+"panel-control/$filename/editar",
+	        data : dados,
+	    }).done(function(res){
+    	
+	    	if(parseInt(res,10) == 1)
+	    	{
+	    		$("#modal_edit_$filename").modal("hide");
+	    		dataTable.draw();
+	    		alertSucesso($('#translate').attr("sucessMessage"));
+	    	}
+	    	else if(parseInt(res,10) == 2)
+	    	{
+	    		alertErro($('#translate').attr("warningMessage"));
+	    	}
+
+	    });
 });
 
 /*------------------------------------------------------------------------
@@ -167,7 +186,7 @@ $(document).off("click",".del").on("click",".del",function(){
 	var id = parseInt($(this).parents("tr").children("td:eq(0)").text(),10);
 	$.ajax({
 		type: "GET",
-	    url: localStorage.getItem("baseUrl")+"/panel-control/$filename/deletar",
+	    url: localStorage.getItem("baseUrl")+"panel-control/$filename/deletar",
 	    data: {id:id}
     }).done(function(res){
     	
@@ -195,6 +214,7 @@ function format(f){
 	    propt = propt.replace("fk_","");
 	    propt = propt.replace("pw_","");
 	    propt = propt.replace("img_","");
+	    propt = propt.replace("_"," ");
 	    string += "<b>"+propt.toUpperCase()+":</b>"+'   '+((f[tmp] == null) ? 'nenhum':f[tmp])+'<br>';
 	}
     return string;

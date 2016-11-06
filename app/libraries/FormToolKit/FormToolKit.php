@@ -37,7 +37,7 @@ class FormToolKit
 		$content = str_replace('$filename', $this->filename, $content);
 		$this->lgtool->addValue("title_".$this->filename,ucfirst($this->filename));
 		$this->lgtool->update();
-		file_put_contents($file,$content);
+		file_put_contents($file,"\xEF\xBB\xBF".$content);
 		chmod($file,0777);
 		$this->log->info("Criado página base $file");
 	}
@@ -92,7 +92,7 @@ class FormToolKit
 		$inputs = $this->fieldsBuilder();
 		$content = str_replace('$campos', $inputs, $content);
 		
-		file_put_contents($file,$content);
+		file_put_contents($file,"\xEF\xBB\xBF".$content);
 		chmod($file,0777);
 		$this->log->info("Criado tab de cadastro $file");
 
@@ -107,6 +107,7 @@ class FormToolKit
 		foreach ($this->table_info_column as $key => $value) {
 			$tmp = '';
 			$explode = explode("(",$value->Type);
+
 			if(isset($explode[0]))
 			{
 
@@ -148,7 +149,7 @@ class FormToolKit
 					$this->lgtool->addValue(strtolower($tmp),ucfirst($tmp));
 					$inputs .= $htm->pictureField(ucfirst($value->Field));
 				}
-				else if(preg_match("/int/",$td) && !preg_match("/id/",$value->Field))
+				else if(preg_match("/int/",$td) && !preg_match("/\id$/",$value->Field))
 				{
 					$inputs .= $htm->controlFormGroup(4);
 					$htm->incLimit(4);
@@ -241,7 +242,7 @@ class FormToolKit
 			{
 				$tmp = str_replace("img_", "", $value->Field);
 			}
-			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
+			if(!preg_match('/fk_/', $value->Field) && !preg_match("/\id$/",$value->Field))
 			{
 				$validators .= "\t\t\t$value->Field: {\n
 					validators: {\n
@@ -256,7 +257,7 @@ class FormToolKit
 
 		$content = str_replace('$validators',$validators, $content);
 
-		file_put_contents($file,$content);
+		file_put_contents($file,"\xEF\xBB\xBF".$content);
 		chmod($file,0777);
 		$this->log->info("Criado script de cadastro $file");
 	}
@@ -289,7 +290,7 @@ class FormToolKit
 
 			if(!preg_match("/img_/",$value->Field))
 			{
-				$filters .= "<option value='$this->tableName.".$value->Field."'>".ucfirst($tmp)."</option>\n\t\t\t\t\t\t\t\t";
+				$filters .= "<option value='$this->tableName.".$value->Field."'>{{trans(Config::get('app.locale').'.".strtolower($tmp)."')}}</option>\n\t\t\t\t\t\t\t\t";
 			}
 			// limit number of columns of table search to 8
 			if($aux <= self::LIMIT_COL_TABLE)
@@ -307,7 +308,7 @@ class FormToolKit
 		$content = str_replace('$header_table', $header_table, $content);
 		$modal_fields = $this->fieldsBuilder();
 		$content = str_replace('$modal_fields', $modal_fields, $content);
-		file_put_contents($file,$content);
+		file_put_contents($file,"\xEF\xBB\xBF".$content);
 		chmod($file,0777);
 		$this->log->info("Criado tab de pesquisa $file");
 	}
@@ -336,7 +337,7 @@ class FormToolKit
 					if(isset($explode[1]))
 						$size = intval($explode[1]);
 
-					if(preg_match("/int/",$td))
+					if(preg_match("/\id$/",$value->Field))
 					$columnsjs .= '{ "name": "'.$value->Field.'","width":"45px" },'."\n\t\t\t\t";
 					else if(preg_match("/varchar/",$td))
 					{
@@ -363,9 +364,12 @@ class FormToolKit
 						}
 
 					}
+					else
+					{
+						$columnsjs .= '{ "name": "'.$value->Field.'"},'."\n\t\t\t\t";
+					}
 				}
-				else
-					$columnsjs .= '{ "name": "'.$value->Field.'"},'."\n\t\t\t\t";
+
 			}
 			
 			$cont++;
@@ -386,7 +390,7 @@ class FormToolKit
 			{
 				$tmp = str_replace("img_", "", $value->Field);
 			}
-			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
+			if(!preg_match('/fk_/', $value->Field) && !preg_match("/\id$/",$value->Field))
 			{
 				$validators .= "\t\t\t$value->Field: {\n
 					validators: {\n
@@ -418,7 +422,7 @@ class FormToolKit
 				$editFields .= "\t\t$('select[name=".strtolower($value->Field)."]').val(res[0].".strtolower($value->Field).");\n";
 			}
 
-			if(!preg_match('/fk_/', $value->Field) && !preg_match("/id/",$value->Field))
+			if(!preg_match('/fk_/', $value->Field) && !preg_match("/\id$/",$value->Field))
 			{
 
 				$editFields .= "\t\t$('input[name=".strtolower($value->Field)."]').val(res[0].".strtolower($value->Field).");\n";
@@ -427,7 +431,7 @@ class FormToolKit
 
 		$content = str_replace('$editFields',$editFields, $content);
 		
-		file_put_contents($file,$content);
+		file_put_contents($file,"\xEF\xBB\xBF".$content);
 		chmod($file,0777);
 		$this->log->info("Criado script de pesquisa $file");
 	}

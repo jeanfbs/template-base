@@ -10,7 +10,7 @@
 							    <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu" aria-labelledby="export">
-							    <li><a href="#" target="_blank"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+							    <li><a href="#" id="pdf"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
 							    <li><a href="#" ><i class="fa fa-file-excel-o"></i> Excel</a></li>
 							  </ul>
 							</div>
@@ -60,8 +60,7 @@
 		</div>
       </div>
       <div class="modal-body devoops-modal-inner">
-        {{Form::open(array('url' => 'panel-control/$filename/editar','class' => 'form-horizontal ',
-'id' => 'form_edit_$filename','files' => true))}}
+        {{Form::open(array('class' => 'form-horizontal ','id' => 'form_edit_$filename','files' => true))}}
 			<input type="hidden" id="edit_cod_$filename" name="edit_cod_$filename">
 			$modal_fields
 		{{Form::close()}}

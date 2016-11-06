@@ -33,11 +33,11 @@ class HTMLFieldsForm
 		$tmp = ucfirst($tmp);
 		return  "\t\t\t<label for='id_".strtolower($tmp)."' class='col-sm-2 control-label'>".(($required === TRUE) ? "*":"")."{{trans(Config::get('app.locale').'.".strtolower($tmp)."')}}</label>\n
 			<div class='col-sm-3'>
-				<input type='password' name='".strtolower($label)."' id='id_".strtolower($tmp)."' class='form-control ".(($required === TRUE) ? "required":"")."' data-toggle='tooltip' data-placement='bottom' title='$tmp' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($tmp)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."' identical='".(($required === TRUE) ? "Valores diferentes":"")."'>
+				<input type='password' name='".strtolower($label)."' id='id_".strtolower($tmp)."' class='form-control ".(($required === TRUE) ? "required":"")."' data-toggle='tooltip' data-placement='bottom' title='$tmp' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($tmp)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."' identical='".(($required === TRUE) ? '{{trans(Config::get("app.locale").".identical")}}':"")."'>
 			</div>\n
 			<label class='col-sm-2 control-label'>*{{trans(Config::get('app.locale').'.confirm')}}</label>\n
 			<div class='col-sm-3'>\n
-				<input type='password' class='form-control ".(($required === TRUE) ? "required":"")."' name='confirmacao' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get(\"app.locale\").\".confirm\")}}' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($tmp)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."' identical='".(($required === TRUE) ? "Valores diferentes":"")."'>
+				<input type='password' class='form-control ".(($required === TRUE) ? "required":"")."' id='id_confirmacao' name='confirmacao' data-toggle='tooltip' data-placement='bottom' title='{{trans(Config::get(\"app.locale\").\".confirm\")}}' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".confirm\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."' identical='".(($required === TRUE) ? '{{trans(Config::get("app.locale").".identical")}}':"")."'>
 			</div>\n
 			<div class='col-sm-2'>
 				<div class='checkbox'>
@@ -106,7 +106,7 @@ class HTMLFieldsForm
 		
 		return "\t\t\t<label for='date_".strtolower($label)."' class='col-sm-2 control-label'>".(($required === TRUE) ? "*":"")."{{trans(Config::get('app.locale').'.".strtolower($label)."')}}</label>\n
 			<div class='col-sm-2'>
-				<input type='text' id='date_".strtolower($label)."' class='form-control ".(($required === TRUE) ? "required":"")."' placeholder='dd/mm/yyyy' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($label)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."'>
+				<input type='text' name='".strtolower($label)."' id='date_".strtolower($label)."' class='form-control datepicker ".(($required === TRUE) ? "required":"")."' placeholder='dd/mm/yyyy' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($label)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."'>
 			</div>\n";
 	}
 
@@ -114,7 +114,7 @@ class HTMLFieldsForm
 		
 		return "\t\t\t<label for='id_".strtolower($label)."' class='col-sm-2 control-label' >".(($required === TRUE) ? "*":"")."{{trans(Config::get('app.locale').'.".strtolower($label)."')}}</label>\n
 			<div class='col-sm-10'>
-					<textarea class='form-control ".(($required === TRUE) ? "required":"")."' rows='5' id='id_".strtolower($label)."' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($label)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."'></textarea>
+					<textarea name='".strtolower($label)."' class='form-control ".(($required === TRUE) ? "required":"")."' rows='5' id='id_".strtolower($label)."' notEmpty='".(($required === TRUE) ? "{{trans(Config::get(\"app.locale\").\".".strtolower($label)."\")}} {{trans(Config::get(\"app.locale\").\".required\")}}":"")."'></textarea>
 			</div>\n";
 	}
 
